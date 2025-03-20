@@ -1,0 +1,72 @@
+Área de aplicación: Validación de datos en sistemas de comercio electrónico.
+Esta script lo implemente en base a algunos videos que vi sobre el uso de estos conceptos, veo donde podria aplicarlos en el futuro
+ya que me dan por decirlo de alguna manera una herramienta mas para poder trabajar con alternativas de lenguajes, aproveche que estamos trabajando 
+con el simulador de tienda y lo enfoque a algo mas similar, encontre un script en github que ya manejaba una idea similar y quise implementarla.
+
+
+La solución asegura la inmutabilidad y la pureza de las funciones al:
+1. No modificar los datos originales, solo validarlos y devolver resultados nuevos.
+2. Utilizar funciones puras que dependen únicamente de sus parámetros de entrada y no producen efectos secundarios.
+3. Devolver nuevos valores (tuplas con resultados de validación) en lugar de alterar el estado interno de los datos.
+
+Inmutabilidad y Pureza:
+Inmutabilidad: Las funciones no modifican los datos originales. Por ejemplo, validar_campo devuelve un nuevo resultado sin alterar el valor de entrada.
+Pureza: Las funciones dependen únicamente de sus parámetros de entrada y no producen efectos secundarios. Por ejemplo, solo_numeros siempre devuelve el mismo resultado para la misma entrada.
+
+
+-----------------------------------------------------------------------------------------------
+Documentación del Validador de Datos
+Descripción General
+El validador de datos es un conjunto de funciones diseñadas para garantizar que los datos ingresados en un sistema cumplan con reglas específicas. Estas funciones son puras e inmutables, lo que significa que no alteran los datos originales y siempre devuelven nuevos resultados basados en las entradas proporcionadas.
+
+Funciones Principales
+validar_campo(valor: any, reglas: List[Callable[[any], Tuple[bool, str]]]) -> Tuple[bool, List[str]]
+
+Valida un valor contra una lista de reglas.
+
+Parámetros:
+
+valor: El valor a validar.
+
+reglas: Lista de funciones de validación.
+
+Retorna:
+
+Una tupla (bool, List[str]), donde el primer elemento indica si el valor es válido y el segundo contiene mensajes de error.
+
+no_vacio(valor: any) -> Tuple[bool, str]
+
+Valida que el valor no esté vacío.
+
+Retorna:
+
+(True, "") si el valor no está vacío.
+
+(False, "Este campo no puede estar vacío.") si el valor está vacío.
+
+longitud_exacta(longitud: int) -> Callable[[any], Tuple[bool, str]]
+
+Devuelve una función que valida que el valor tenga una longitud exacta.
+
+Retorna:
+
+Una función que valida la longitud del valor.
+
+solo_numeros(valor: any) -> Tuple[bool, str]
+
+Valida que el valor contenga solo números.
+
+Retorna:
+
+(True, "") si el valor contiene solo números.
+
+(False, "Solo se permiten números.") si el valor contiene caracteres no numéricos.
+
+prefijo_valido(prefijos: Tuple[str, ...]) -> Callable[[any], Tuple[bool, str]]
+
+Devuelve una función que valida que el valor comience con uno de los prefijos dados.
+
+Retorna:
+
+Una función que valida el prefijo del valor.
+
